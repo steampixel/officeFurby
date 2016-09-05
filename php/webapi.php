@@ -15,7 +15,6 @@ if(isset($_POST['text'])){
         sleep(0.5);
         Furby::stopEngine();
         
-        
         Furby::speak($sentence,$_POST['voice'],$_POST['language'],$_POST['speed'],$_POST['pitch'],$_POST['volume']);
         
     }
