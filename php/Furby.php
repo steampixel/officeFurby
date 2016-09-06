@@ -15,12 +15,12 @@ class Furby{
 
     static public function speak($sentence,$voice='f4',$language='de',$speed='100',$pitch='50',$volume='100'){
 	 
-        //$command = 'sudo espeak -v'.$language.'+'.$voice.' -s'.$speed.' -a'.$volume.' -p'.$pitch.' "'.$sentence.'"';
+        //$command = 'sudo espeak -v'.escapeshellcmd($language).'+'.escapeshellcmd($voice).' -s'.escapeshellcmd($speed).' -a'.escapeshellcmd($volume).' -p'.escapeshellcmd($pitch).' "'.escapeshellcmd($sentence).'"';
 
 	//Test with aplay to avoid espeak from getting slow and sounding broken when playing long texts
 	//Note aplay must run in sudo as well because you cannot pipe output from a sudo process to a process with lower permissions.
 	//Iam not sure why i use espeak with sudo...This is not neccessarry.
-	$command = '(sudo espeak --stdout -v'.$language.'+'.$voice.' -s'.$speed.' -a'.$volume.' -p'.$pitch.' "'.$sentence.'" | sudo aplay)';
+	$command = '(sudo espeak --stdout -v'.escapeshellcmd($language).'+'.escapeshellcmd($voice).' -s'.escapeshellcmd($speed).' -a'.escapeshellcmd($volume).' -p'.escapeshellcmd($pitch).' "'.escapeshellcmd($sentence).'" | sudo aplay)';
 
         echo $command;
 
@@ -54,3 +54,4 @@ class Furby{
     }
     
 }
+
