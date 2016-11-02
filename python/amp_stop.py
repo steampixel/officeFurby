@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-import pifacedigitalio as p
+import RPi.GPIO as GPIO
 
-#init the piface board
-#False means do not reinit the board again
-#But you have to init it once!
-pdf = p.PiFaceDigital(0,0,0,False)
+# use P1 header pin numbering convention
+GPIO.setmode(GPIO.BCM)
 
-pdf.output_pins[0].value = 0 #stop
+GPIO.setup(17, GPIO.OUT)
+
+GPIO.output(17, False)

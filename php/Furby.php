@@ -2,7 +2,7 @@
 
 class Furby{
 
-    static function init(){
+    /*static function init(){
 	
 	//init piface
 	//For some reason spl needs sudo privileges. Thats one reason why www-data belongs to the sodoers.
@@ -11,11 +11,13 @@ class Furby{
         //force audio jack
 	//For some reason my pi wont save this permanently. So i will force it on every  request.
         shell_exec('sudo amixer cset numid=3 1');
-    }
+    }*/
 
     static public function speak($sentence,$voice='f4',$language='de',$speed='100',$pitch='50',$volume='100'){
-	 
-        //$command = 'sudo espeak -v'.escapeshellcmd($language).'+'.escapeshellcmd($voice).' -s'.escapeshellcmd($speed).' -a'.escapeshellcmd($volume).' -p'.escapeshellcmd($pitch).' "'.escapeshellcmd($sentence).'"';
+
+	self::startAmp();
+ 
+        //$command = 'sudo espeak -v'.$language.'+'.$voice.' -s'.$speed.' -a'.$volume.' -p'.$pitch.' "'.$sentence.'"';
 
 	//Test with aplay to avoid espeak from getting slow and sounding broken when playing long texts
 	//Note aplay must run in sudo as well because you cannot pipe output from a sudo process to a process with lower permissions.
@@ -26,20 +28,22 @@ class Furby{
 
         shell_exec($command);
 	//system($command);
- 
+ 	
+	self::stopAmp();
+
     }
     
-    public static function startEngine(){
+    public static function animate(){
         
-        shell_exec('sudo python ../python/engine_start.py');
+        shell_exec('sudo python ../python/animate.py');
         
     }
     
-    public function stopEngine(){
+    /*public function stopEngine(){
         
         shell_exec('sudo python ../python/engine_stop.py');
         
-    }
+    }*/
 
     public function startAmp(){
         
