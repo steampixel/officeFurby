@@ -14,7 +14,11 @@ class Furby{
     }
 
     static public function speak($sentence,$voice='f4',$language='de',$speed='100',$pitch='50',$volume='100'){
-	 
+        
+        //Remove quotes because the furby will read quotes as \ because escapeshellcmd will add backslashes before quotes
+        $sentence = str_replace("'",'',$sentence);
+        $sentence = str_replace('"','',$sentence);
+        
         //$command = 'sudo espeak -v'.escapeshellcmd($language).'+'.escapeshellcmd($voice).' -s'.escapeshellcmd($speed).' -a'.escapeshellcmd($volume).' -p'.escapeshellcmd($pitch).' "'.escapeshellcmd($sentence).'"';
 
 	//Test with aplay to avoid espeak from getting slow and sounding broken when playing long texts
